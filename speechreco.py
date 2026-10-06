@@ -19,7 +19,8 @@ engine.setProperty('rate', 150)  # Adjust the speed of speech
 engine.setProperty('volume', 1.0)  # Set volume level (0.0 to 1.0)
 
 def speak(text):
-    engine.say(text)
+    print("JARVIS:", text)
+    engine.say(str(text))
     engine.runAndWait()
 
 def wish_me():
@@ -91,8 +92,9 @@ if __name__ == "__main__":
         elif 'how are you' in query:
             speak("I am functioning optimally, sir.")
 
-        elif 'what time is it' in query:
+        elif 'what time is it' in query or 'tell me the time' in query:
             strTime = datetime.datetime.now().strftime("%H:%M:%S")
+            print(f"The time is {strTime}, sir.")
             speak(f"The time is {strTime}, sir.")
 
         elif 'open youtube' in query:
