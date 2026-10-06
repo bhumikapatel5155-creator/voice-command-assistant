@@ -20,8 +20,15 @@ engine.setProperty('volume', 1.0)  # Set volume level (0.0 to 1.0)
 
 def speak(text):
     print("JARVIS:", text)
-    engine.say(str(text))
-    engine.runAndWait()
+
+    voice_engine = pyttsx3.init('sapi5')
+    voice_engine.setProperty('rate', 150)
+    voice_engine.setProperty('volume', 1.0)
+
+    voice_engine.say(str(text))
+    voice_engine.runAndWait()
+    voice_engine.stop()
+
 
 def wish_me():
     hour = datetime.datetime.now().hour
@@ -92,10 +99,15 @@ if __name__ == "__main__":
         elif 'how are you' in query:
             speak("I am functioning optimally, sir.")
 
-        elif 'what time is it' in query or 'tell me the time' in query:
+        elif 'what time is it' in query:
             strTime = datetime.datetime.now().strftime("%H:%M:%S")
             print(f"The time is {strTime}, sir.")
             speak(f"The time is {strTime}, sir.")
+
+        elif 'what is the date' in query or 'tell me the date' in query:
+            today = datetime.datetime.now().strftime("%d %B %Y")
+            speak(f"Today's date is {today}, sir.")
+            print(f"Today's date is {today}")
 
         elif 'open youtube' in query:
             webbrowser.open("https://www.youtube.com")
